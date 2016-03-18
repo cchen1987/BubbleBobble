@@ -1,0 +1,18 @@
+c:\users\asus\documents\visual studio 2015\Projects\DamGame\DamGame\bin\Debug\DamGame.exe.config
+c:\users\asus\documents\visual studio 2015\Projects\DamGame\DamGame\bin\Debug\DamGame.exe
+c:\users\asus\documents\visual studio 2015\Projects\DamGame\DamGame\bin\Debug\DamGame.pdb
+c:\users\asus\documents\visual studio 2015\Projects\DamGame\DamGame\obj\Debug\DamGame.csprojResolveAssemblyReference.cache
+c:\users\asus\documents\visual studio 2015\Projects\DamGame\DamGame\obj\Debug\DamGame.exe
+c:\users\asus\documents\visual studio 2015\Projects\DamGame\DamGame\obj\Debug\DamGame.pdb
+C:\Users\chao\Desktop\DAM\Programacion\PrincessOfSanvi2_01_skeleton\DamGame\bin\Debug\DamGame.exe.config
+C:\Users\chao\Desktop\DAM\Programacion\PrincessOfSanvi2_01_skeleton\DamGame\obj\Debug\DamGame.exe
+C:\Users\chao\Desktop\DAM\Programacion\PrincessOfSanvi2_01_skeleton\DamGame\obj\Debug\DamGame.pdb
+C:\Users\chao\Desktop\DAM\Programacion\JackTheRipper\Bubblebobble\bin\Debug\DamGame.exe.config
+C:\Users\chao\Desktop\DAM\Programacion\JackTheRipper\Bubblebobble\obj\Debug\DamGame.exe
+C:\Users\chao\Desktop\DAM\Programacion\JackTheRipper\Bubblebobble\obj\Debug\DamGame.pdb
+C:\Users\chao\Desktop\DAM\Programacion\BubbleBobble\Bubblebobble\bin\Debug\DamGame.exe.config
+C:\Users\chao\Desktop\DAM\Programacion\BubbleBobble\Bubblebobble\obj\Debug\DamGame.exe
+C:\Users\chao\Desktop\DAM\Programacion\BubbleBobble\Bubblebobble\obj\Debug\DamGame.pdb
+C:\Users\chao\Desktop\DAM\Programacion\BubbleBobble\Bubblebobble\bin\Debug\DamGame.exe
+C:\Users\chao\Desktop\DAM\Programacion\BubbleBobble\Bubblebobble\bin\Debug\DamGame.pdb
+C:\Users\chao\Desktop\DAM\Programacion\BubbleBobble\Bubblebobble\obj\Debug\DamGame.csprojResolveAssemblyReference.cache
