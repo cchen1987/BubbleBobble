@@ -23,12 +23,21 @@ namespace DamGame
             Image image = new Image("data/welcome3.png");
             Image player1 = new Image("data/personaje.png");
             Image player2 = new Image("data/personaje2.png");
+            Image welcomeText1 = Hardware.CreateImageFromText("Press P to Play",
+                    0xCC, 0xCC, 0xCC,
+                    font18);
+            Image welcomeText2 = Hardware.CreateImageFromText("Press Q to Quit",
+                    0xCC, 0xCC, 0xCC,
+                    font18);
+            Image welcomeText3 = Hardware.CreateImageFromText("Press C to Credits",
+                    0xCC, 0xCC, 0xCC,
+                    font18);
             Balls[] balls = new Balls[2];
             balls[0] = new Balls(g, r.Next(0, 902), r.Next(0, 680), 0);
             balls[1] = new Balls(g, r.Next(0, 902), r.Next(0, 680), 1);
-
+            
             bool validOptionChosen = false;
-           
+            
             do
             {
                 Hardware.ClearScreen();     
@@ -39,18 +48,9 @@ namespace DamGame
                 balls[1].DrawOnHiddenScreen(); 
                 Hardware.DrawHiddenImage(player1, 50, 530);
                 Hardware.DrawHiddenImage(player2, 730, 530);
-                Hardware.WriteHiddenText("Press P to Play",
-                    410, 550,
-                    0xCC, 0xCC, 0xCC,
-                    font18);
-                Hardware.WriteHiddenText("Press Q to Quit",
-                    410, 600,
-                    0xCC, 0xCC, 0xCC,
-                    font18);
-                Hardware.WriteHiddenText("Press C to Quit",
-                    410, 650,
-                    0xCC, 0xCC, 0xCC,
-                    font18);
+                Hardware.DrawHiddenImage(welcomeText1, 410, 550);
+                Hardware.DrawHiddenImage(welcomeText2, 410, 600);
+                Hardware.DrawHiddenImage(welcomeText3, 410, 650);  
                 Hardware.ShowHiddenScreen();
             
                 if (Hardware.KeyPressed(Hardware.KEY_P) ||
@@ -73,6 +73,7 @@ namespace DamGame
                 Hardware.Pause(50);
             }
             while (!validOptionChosen);
+            balls = null;
         }
 
         public options GetOptionChosen()

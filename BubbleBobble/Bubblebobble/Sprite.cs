@@ -22,8 +22,11 @@ namespace DamGame
         protected bool containsSequence;
         protected int currentFrame;
         protected Game myGame;
-        protected bool jumping, falling; 
+        protected bool jumping;
+        protected bool falling; 
         protected bool isDead;
+        protected bool isRight;
+        protected bool immune;
         protected int jumpXspeed;
         protected int jumpFrame;
         protected int[] jumpSteps =
@@ -35,11 +38,12 @@ namespace DamGame
         protected DateTime startTime;
         protected DateTime currentTime;
         protected int stepsTillNextFrame;
-        protected int currentStep;
-
-        protected byte numDirections = 14;
+        protected int currentStep;  
+        protected int rangeX;
+        protected int rangeY;
+        
+        protected byte numDirections = 15;
         protected byte currentDirection;
-        protected bool isRight = false;
         public const byte RIGHT = 0;
         public const byte LEFT = 1;
         public const byte DOWN = 2;
@@ -48,12 +52,13 @@ namespace DamGame
         public const byte DOWNLEFT = 5;
         public const byte UPRIGHT = 6;
         public const byte UPLEFT = 7;
-        public const byte APPEARING = 8;
-        public const byte DISAPPEARING = 9;
+        public const byte APPEARINGRIGHT = 8;
+        public const byte APPEARINGLEFT = 9;
         public const byte JUMPING = 10;
         public const byte FIRELEFT = 11;
         public const byte FIRERIGHT = 12;
         public const byte DEAD = 13;
+        public const byte MOVING = 14;
                                        
         public Sprite(Game g)
         {
@@ -73,7 +78,8 @@ namespace DamGame
             falling = false;
             myGame = g;
             isRight = true;
-        }
+            immune = false;
+        }  
 
         public Sprite(string imageName, Game g)
             : this(g)
@@ -93,7 +99,7 @@ namespace DamGame
             containsSequence = false;
         }
 
-        public void LoadSequence(byte direction, string[] names)
+        public virtual void LoadSequence(byte direction, string[] names)
         {
             int amountOfFrames = names.Length;
             sequence[direction] = new Image[amountOfFrames];
@@ -179,7 +185,10 @@ namespace DamGame
             else if (myGame.IsValidMove(x + xSpeed, y + height, x + width + xSpeed, y + height))
             {
                 x += xSpeed;
-                ChangeDirection(RIGHT);
+                if (!immune)
+                    ChangeDirection(RIGHT);
+                else
+                    ChangeDirection(APPEARINGRIGHT);
                 NextFrame();
             }
         }
@@ -194,7 +203,10 @@ namespace DamGame
             else if (myGame.IsValidMove(x - xSpeed, y + height, x + width - xSpeed, y + height))
             {
                 x -= xSpeed;
-                ChangeDirection(LEFT);
+                if (!immune)
+                    ChangeDirection(LEFT);
+                else
+                    ChangeDirection(APPEARINGLEFT);
                 NextFrame();
             }
         }
@@ -211,17 +223,23 @@ namespace DamGame
         public void JumpRight()
         {
             isRight = true;
-            Jump();
-            ChangeDirection(RIGHT);
             jumpXspeed = xSpeed;
+            if (!immune)
+                ChangeDirection(RIGHT);
+            else
+                ChangeDirection(APPEARINGRIGHT);
+            Jump(); 
         }
 
         public void JumpLeft()
         {
-            isRight = false;
-            Jump();
-            ChangeDirection(LEFT);
+            isRight = false;  
             jumpXspeed = -xSpeed;
+            if (!immune)
+                ChangeDirection(LEFT);
+            else
+                ChangeDirection(APPEARINGLEFT);
+            Jump();
         }
 
         public virtual void Move()
@@ -267,9 +285,11 @@ namespace DamGame
                 
         public void Fire()
         {     
-            if (currentDirection == LEFT) 
+            if (currentDirection == LEFT ||
+                    currentDirection == APPEARINGLEFT) 
                 ChangeDirection(FIRELEFT); 
-            else if (currentDirection == RIGHT) 
+            else if (currentDirection == RIGHT ||
+                    currentDirection == APPEARINGRIGHT) 
                 ChangeDirection(FIRERIGHT);
             NextFrame();
         } 
@@ -290,7 +310,7 @@ namespace DamGame
             visible = false;
         } 
 
-        public void DrawOnHiddenScreen()
+        public virtual void DrawOnHiddenScreen()
         {
             if (!visible)
                 return;
@@ -318,23 +338,6 @@ namespace DamGame
         {
             return isDead;
         }
-
-        public void Die()
-        {
-            isDead = true;
-            ChangeDirection(DEAD);
-            DisplayDeadFrame();
-        }
-
-        public void DisplayDeadFrame()
-        {
-            for (int i = 0; i < sequence[DEAD].Length; i++)
-            {
-                currentFrame++;
-                if (currentFrame >= sequence[currentDirection].Length)
-                    currentFrame = 0;
-            }     
-        }           
 
         public void ChangeDirection(byte newDirection)
         {
@@ -389,7 +392,7 @@ namespace DamGame
             time = duration.Seconds;
         }
 
-        public void Restart()
+        public virtual void Restart()
         {
             isDead = false;
             x = startX;

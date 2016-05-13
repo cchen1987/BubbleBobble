@@ -9,12 +9,14 @@
             ChangeDirection(RIGHT);
             x = newX;
             y = newY;
-            xSpeed = 6;
-            ySpeed = 7;
+            xSpeed = 4;
+            ySpeed = 5;
             width = 48;
             height = 48;
             stepsTillNextFrame = 5;
             currentStep = 0;
+            rangeX = 400;
+            rangeY = 60;
         }             
     }
 }

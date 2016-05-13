@@ -76,7 +76,17 @@ public class Hardware
         // drawHiddenImage(image.GetPointer(), x, y);
         drawHiddenImage(image.GetPointer(), x + startX, y + startY);
     }
-
+    
+    public static Image CreateImageFromText(string text, byte r,
+            byte g, byte b, Font f)
+    {
+        Sdl.SDL_Color color = new Sdl.SDL_Color(r, g, b);
+        IntPtr textoComoImagen = SdlTtf.TTF_RenderText_Solid(
+            f.GetPointer(), text, color);
+        
+        return new Image(textoComoImagen);
+    }
+    
     public static void WriteHiddenText(string txt,
         short x, short y, byte r, byte g, byte b, Font f)
     {
@@ -94,6 +104,8 @@ public class Hardware
 
         Sdl.SDL_BlitSurface(textoComoImagen, ref origen,
             hiddenScreen, ref dest);
+            
+        Sdl.SDL_FreeSurface(textoComoImagen);
     }
 
     public static void ShowHiddenScreen()

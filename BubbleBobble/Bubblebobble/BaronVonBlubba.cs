@@ -12,9 +12,11 @@
             xSpeed = 6;
             ySpeed = 6;
             width = 54;
-            height = 44; 
+            height = 44;
+            isBaron = true; 
         }
 
+        // Baron movement, no collisions
         public override void Move()
         {
             if (x < 134 || x > 917 - width)

@@ -9,18 +9,17 @@
             Image floor = new Image("data/Brick2.png");
             int playerX = 500;
             int playerY = 250;
-            
+            Image text = Hardware.CreateImageFromText("Press R to return...",
+                    0x80, 0x80, 0x80,
+                    font18);
+            Image programmer = Hardware.CreateImageFromText("Programmed by Chen",
+                    0xCC, 0xCC, 0xCC,
+                    font18);
             do
             {
                 Hardware.ClearScreen();
-                Hardware.WriteHiddenText("Programmed by Chen",
-                    400, 10,
-                    0xCC, 0xCC, 0xCC,
-                    font18);
-                Hardware.WriteHiddenText("Press R to return...",
-                    394, 50,
-                    0x80, 0x80, 0x80,
-                    font18);
+                Hardware.DrawHiddenImage(programmer, 400, 10);
+                Hardware.DrawHiddenImage(text, 394, 50);
                 Hardware.DrawHiddenImage(player, playerX, playerY);
                 for (int i = 0; i < 30; i++)
                      Hardware.DrawHiddenImage(floor, 100 + i * 28, 357);
